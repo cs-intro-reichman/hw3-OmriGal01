@@ -102,7 +102,7 @@ public class Algebra {
 	// Returns the integer part of x1 / x2 
 	public static int div(int x1, int x2) {
 		int positiveNegative = 1;
-		//Instead of writing different loops for each case of positive/negative ints, we turn all negative integers into positive and multiply by (-1) if needed.
+		//Instead of writing different loops for each case of positive/negative ints, we turn all negative integers into positives and multiply by (-1) if needed.
 		if (x1 == 0 || x2 == 0) {
 			//I assume the input is valid so will not give a correct answer for division by zero.
 			return 0;
@@ -139,7 +139,7 @@ public class Algebra {
 	// Returns the integer part of sqrt(x) 
 	public static int sqrt(int x) {
 		int result = 0;
-		for (int i = 0; i < x; i++) {
+		for (int i = 0; i <= x; i++) {
 			result = times(i, i);
 			if (result > x) {
 				return (minus(i, 1));
