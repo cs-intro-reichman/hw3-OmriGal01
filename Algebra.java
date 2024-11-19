@@ -24,6 +24,8 @@ public class Algebra {
    		System.out.println(div(12,3));   // 12 / 3    
    		System.out.println(div(5,5));    // 5 / 5  
    		System.out.println(div(25,7));
+		   System.out.println(div(25,-7));
+		   System.out.println(div(-70,7));
 		   System.out.println("\nMOD");   // 25 / 7
    		System.out.println(mod(25,7));   // 25 % 7
    		System.out.println(mod(120,6));
@@ -99,12 +101,31 @@ public class Algebra {
 
 	// Returns the integer part of x1 / x2 
 	public static int div(int x1, int x2) {
+		int positiveNegative = 1;
+		//Instead of writing different loops for each case of positive/negative ints, we turn all negative integers into positive and multiply by (-1) if needed.
+		if (x1 == 0 || x2 == 0) {
+			//I assume the input is valid so will not give a correct answer for division by zero.
+			return 0;
+		}
+		else if (x1 < 0 && x2 < 0) {
+			x1 = times(x1, -1);
+			x2 = times(x2, -1);
+		}
+		else if (x1 > 0 && x2 < 0) {
+			positiveNegative = -1;
+			x2 = times(x2, -1);
+		}
+		else if (x1 < 0 && x2 > 0) {
+			positiveNegative = -1;
+			x1 = times(x1, -1);
+		}
+
 		for (int i = 1; i < x1; i++) {
 			if (times(i, x2) > x1) {
-				return (minus(i, 1));
+				return times((minus(i, 1)), positiveNegative);
 			}
 			else if (times(i, x2) == x1) {
-				return i;
+				return times(i, positiveNegative);
 			}
 		}
 		return 0;
