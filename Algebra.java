@@ -7,6 +7,7 @@ public class Algebra {
 	public static void main(String args[]) {
 	    // Tests some of the operations
 	    System.out.println(plus(2,3));   // 2 + 3
+		System.out.println(plus(2,-3));   // 2 + 3
 		System.out.println(minus(7,2));  // 7 - 2
  		System.out.println(times(3,4));  // 3 * 4
    		System.out.println(plus(2,times(4,2)));  // 2 + 4 * 2
@@ -34,7 +35,7 @@ public class Algebra {
 		}
 		else {
 			for (int i = 0; i > x2; i--) {
-				x1++;
+				x1--;
 			}
 		}
 		return x1;
