@@ -28,8 +28,11 @@ public class LoanCalc {
 	// Computes the ending balance of a loan, given the loan amount, the periodical
 	// interest rate (as a percentage), the number of periods (n), and the periodical payment.
 	private static double endBalance(double loan, double rate, int n, double payment) {	
-		// Replace the following statement with your code
-		return 0;
+		double endingBalance = loan;
+		for (int i = 0; i < n; i++) {
+			endingBalance = (endingBalance - payment) * (1 + (rate / 100.0));
+		}
+		return endingBalance;
 	}
 	
 	// Uses sequential search to compute an approximation of the periodical payment
@@ -38,8 +41,15 @@ public class LoanCalc {
 	// the number of periods (n), and epsilon, the approximation's accuracy
 	// Side effect: modifies the class variable iterationCounter.
     public static double bruteForceSolver(double loan, double rate, int n, double epsilon) {
-		// Replace the following statement with your code
-		return 0;
+		double gPayment = loan / n;
+		iterationCounter = 1;
+		double approxResult = endBalance(loan, rate, n, gPayment);
+		while ((approxResult > epsilon) && (gPayment <= loan)) {
+			gPayment++;
+			iterationCounter++;
+			approxResult = endBalance(loan, rate, n, gPayment);
+		}
+		return gPayment;
     }
     
     // Uses bisection search to compute an approximation of the periodical payment 
@@ -48,7 +58,20 @@ public class LoanCalc {
 	// the number of periods (n), and epsilon, the approximation's accuracy
 	// Side effect: modifies the class variable iterationCounter.
     public static double bisectionSolver(double loan, double rate, int n, double epsilon) {  
-        // Replace the following statement with your code
-		return 0;
+        double highSearch = loan;
+		double lowSearch = loan / n;
+		double gPayment = (highSearch + lowSearch) / 2;
+		iterationCounter = 1;
+		while (highSearch - lowSearch > epsilon) {
+			if (endBalance(loan, rate, n, gPayment) * endBalance(loan, rate, n, lowSearch) > 0) {
+				lowSearch = gPayment;
+			}
+			else {
+				highSearch = gPayment;
+			}
+			gPayment = (highSearch + lowSearch) / 2;
+			iterationCounter++;
+		}
+		return gPayment;
     }
 }
