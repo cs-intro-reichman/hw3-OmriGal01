@@ -42,10 +42,10 @@ public class LoanCalc {
 	// Side effect: modifies the class variable iterationCounter.
     public static double bruteForceSolver(double loan, double rate, int n, double epsilon) {
 		double gPayment = loan / n;
-		iterationCounter = 1;
+		iterationCounter = 0;
 		double approxResult = endBalance(loan, rate, n, gPayment);
 		while ((approxResult > epsilon) && (gPayment <= loan)) {
-			gPayment++;
+			gPayment += 0.001;
 			iterationCounter++;
 			approxResult = endBalance(loan, rate, n, gPayment);
 		}
@@ -61,7 +61,7 @@ public class LoanCalc {
         double highSearch = loan;
 		double lowSearch = loan / n;
 		double gPayment = (highSearch + lowSearch) / 2;
-		iterationCounter = 1;
+		iterationCounter = 0;
 		while (highSearch - lowSearch > epsilon) {
 			if (endBalance(loan, rate, n, gPayment) * endBalance(loan, rate, n, lowSearch) > 0) {
 				lowSearch = gPayment;
