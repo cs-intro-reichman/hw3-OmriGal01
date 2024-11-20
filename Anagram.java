@@ -34,6 +34,13 @@ public class Anagram {
 	public static boolean isAnagram(String str1, String str2) {
 		str1 = preProcess(str1);
 		str2 = preProcess(str2);
+		//Because we disregard spaces, we first want to remove the spaces from the checked words.
+		while (str1.indexOf(' ') != -1) {
+			str1 = str1.substring(0, str1.indexOf(' ')) + str1.substring(str1.indexOf(' ') + 1, str1.length());
+		}
+		while (str2.indexOf(' ') != -1) {
+			str2 = str2.substring(0, str2.indexOf(' ')) + str2.substring(str2.indexOf(' ') + 1, str2.length());
+		}
 		char checkedChar;
 		int isCharInStr = -1;
 		
@@ -46,6 +53,7 @@ public class Anagram {
 		for (int i = 0; i < str1.length(); i++) {
 			checkedChar = str1.charAt(i);
 			isCharInStr = str2.indexOf(checkedChar);
+			
 			if (isCharInStr == -1) {
 				return false;
 			}
@@ -66,7 +74,7 @@ public class Anagram {
 			if ((char1 > 64) && (char1 < 91)) {
 				processedStr += (char) (char1 + 32);
 			}
-			else if ((char1 > 96) && (char1 < 123)) {
+			else if (((char1 > 96) && (char1 < 123)) || char1 == 32) {
 				processedStr += char1;
 			}
 		}
@@ -78,6 +86,7 @@ public class Anagram {
 	public static String randomAnagram(String str) {
 		String randomString = "";
 		int rand;
+
 		while (str.length() > 0) {
 			rand = (int) (Math.random() * str.length());
 			randomString += str.charAt(rand);
